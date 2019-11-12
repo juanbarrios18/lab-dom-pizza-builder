@@ -20,6 +20,7 @@ var state = {
   glutenFreeCrust: false
 }
 
+
 // This function takes care of rendering the pizza based on the state
 // This function is triggered once at the begining and everytime the state is changed
 function renderEverything() {
@@ -128,54 +129,36 @@ function renderButtons() {
 
 function renderPrice() {
   // Iteration 4: change the HTML of `<aside class="panel price">`
+  
+  let total = 0;
+
   total += basePrice;
-  state.forEach(ingredient => {
-    console.log(ingredient);
-  })
 
-
-
- 
   if(state.pepperonni){
-    document.querySelectorAll('.price li')[0].style.visibility = 'visible'
-    total += ingredients.pepperonni.price;
-  }
-  if(!state.pepperonni){
-    document.querySelectorAll('.price li')[0].style.visibility = 'hidden';
-    total -= ingredients.pepperonni.price;
-  }
+    total += Number(ingredients.pepperonni.price);
+  };
 
   if(state.mushrooms){
-    document.querySelector('.btn-mushrooms').classList.add('active');
-  }
-  if(!state.mushrooms){
-    document.querySelector('.btn-mushrooms').classList.remove('active');
-  }
+    total += Number(ingredients.mushrooms.price);
+  };
 
   if(state.greenPeppers){
-    document.querySelector('.btn-green-peppers').classList.add('active');
-  }
-  if(!state.greenPeppers){
-    document.querySelector('.btn-green-peppers').classList.remove('active');
-  }
+    total += Number(ingredients.greenPeppers.price);
+  };
 
   if(state.whiteSauce){
-    document.querySelector('.btn-sauce').classList.add('active');
-  }
-  if(!state.whiteSauce){
-    document.querySelector('.btn-sauce').classList.remove('active');
-  }
-  
+    total += Number(ingredients.whiteSauce.price);
+  };
+
   if(state.glutenFreeCrust){
-    document.querySelector('.btn-crust').classList.add('active');
-  }
-  if(!state.glutenFreeCrust){
-    document.querySelector('.btn-crust').classList.remove('active');
-  }
-  console.log(total);
+    total += Number(ingredients.glutenFreeCrust.price);
+  };
+
+
+  
+  document.querySelector('.price strong span').innerText = total;
+  
 }
-
-
 
 
 // Iteration 1: Example of a click event listener on `<button class="btn btn-pepperonni">`
@@ -207,3 +190,4 @@ document.querySelector('.btn.btn-crust').onclick = function() {
   state.glutenFreeCrust = !state.glutenFreeCrust
   renderEverything()
 }
+renderEverything();
